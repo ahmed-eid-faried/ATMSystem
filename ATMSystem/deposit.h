@@ -1,0 +1,91 @@
+#pragma once
+#include<iostream>
+#include<fstream>
+#include<string >
+#include<vector>
+#include<iomanip>
+#include "withdraw.h"
+#include "model.h"
+#include "libs.h"
+#include "login.h"
+
+using namespace std;
+void PrintClientCard(sClient Client);
+void BackToMainMenue();
+
+string ConvertRecordToLine(sClient Client, string Seperator);
+bool MarkClientForUpdateByAccountNumber(string AccountNumber, vector <sClient>& vClients);
+sClient ReadDepositClient(sClient vClient, double DepositValue) {
+	sClient client;
+	client.AccountNumber = vClient.AccountNumber;
+	client.PinCode = vClient.PinCode;
+	client.Name = vClient.Name;
+	client.Phone = vClient.Phone;
+	bool CheckBalance = ((vClient.AccountBalance + DepositValue) >= 0);
+	if (!CheckBalance) {
+		cout << "The value you entered is incorrect." << endl;
+		BackToMainMenue();
+	}
+	client.AccountBalance = CheckBalance ? vClient.AccountBalance + DepositValue : vClient.AccountBalance;
+	return client;
+};
+
+vector <sClient> SaveDepositCleintsDataToFile(string FileName, vector<sClient> vClients, double DepositValue) {
+	fstream MyFile;
+
+	MyFile.open(FileName, ios::out);
+	//overwrite
+	string  DataLine;
+	if (MyFile.is_open()) {
+		for (sClient C : vClients) {
+			if (C.MarkForUpdate == false) {
+				//we only write records that are not marked for delete.  
+				DataLine = ConvertRecordToLine(C, Seperator);
+				MyFile << DataLine << endl;
+			}
+			else {
+				DataLine = ConvertRecordToLine(ReadDepositClient(C, DepositValue), Seperator);
+				MyFile << DataLine << endl;
+			}
+		}         MyFile.close();
+	} return vClients;
+}
+bool IsFindClientByAccountNumber(string AccountNumber, vector<sClient> vClients, sClient& Client) {
+	for (sClient C : vClients) {
+		if (C.AccountNumber == AccountNumber) {
+			Client = C;
+			return true;
+		}
+	}
+	return false;
+}
+bool DepositClientByAccountNumber(string AccountNumber, vector<sClient>& vClients, double DepositValue) {
+	sClient Client;
+	char Answer = 'n';
+	if (IsFindClientByAccountNumber(AccountNumber, vClients, Client)) {
+		PrintClientCard(Client);
+		cout << "\n\nAre you sure you want update this client? y/n ? ";
+		cin >> Answer;
+		if (Answer == 'y' || Answer == 'Y') {
+			MarkClientForUpdateByAccountNumber(AccountNumber, vClients);
+			SaveDepositCleintsDataToFile(ClientsFileName, vClients, DepositValue);
+			vClients = LoadCleintsDataFromFile(ClientsFileName);
+			return true;
+		}
+	}
+	else {
+		cout << "\nClient with Account Number (" << AccountNumber << ") is Not Found!";
+		return false;
+	}
+}
+
+void Deposit() {
+	cout << "====================================================" << endl;
+	cout << "\t\tDeposit Client\n";
+	cout << "====================================================" << endl;
+	vector <sClient> vClients = LoadCleintsDataFromFile(ClientsFileName);
+	string AccountNumber = CurrentClient.AccountNumber;
+	//ReadClientAccountNumber();
+	double DepositValue = ReadDoubleNumber("ENTER YOUR Deposit Value: ");
+	DepositClientByAccountNumber(AccountNumber, vClients, DepositValue);
+}

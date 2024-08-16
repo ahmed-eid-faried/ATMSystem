@@ -13,10 +13,42 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\Login">
+      <UniqueIdentifier>{ee0a019e-5f18-45f5-b58d-03425c5d13f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\transcriptions">
+      <UniqueIdentifier>{ce596b3d-fd4c-4c8b-90a3-4aaa49752217}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ATMSystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="libs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="main.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="model.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="login.h">
+      <Filter>Header Files\Login</Filter>
+    </ClInclude>
+    <ClInclude Include="deposit.h">
+      <Filter>Header Files\transcriptions</Filter>
+    </ClInclude>
+    <ClInclude Include="total_balances.h">
+      <Filter>Header Files\transcriptions</Filter>
+    </ClInclude>
+    <ClInclude Include="withdraw.h">
+      <Filter>Header Files\transcriptions</Filter>
+    </ClInclude>
+    <ClInclude Include="QuickWithdraw.h">
+      <Filter>Header Files\transcriptions</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

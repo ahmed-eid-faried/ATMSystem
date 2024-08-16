@@ -129,6 +129,16 @@
   <ItemGroup>
     <ClCompile Include="ATMSystem.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="deposit.h" />
+    <ClInclude Include="libs.h" />
+    <ClInclude Include="login.h" />
+    <ClInclude Include="main.h" />
+    <ClInclude Include="model.h" />
+    <ClInclude Include="QuickWithdraw.h" />
+    <ClInclude Include="total_balances.h" />
+    <ClInclude Include="withdraw.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
