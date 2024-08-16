@@ -14,12 +14,12 @@ void QuickWithdraw() {
 	cout << "====================================================" << endl;
 	cout << "\t\tMain Menue Screen\n";
 	cout << "====================================================" << endl;
-	for (int i = 1; i <= 20; i++)
+	for (int i = 1; i <= 10; i++)
 	{
 		printf("\t[%1d] %1d", i, i * 100);
 		if (i % 3 == 0)	cout << endl;
 	}
 	cout << "\n====================================================" << endl;
-	int WithdrawValue = 100 * ReadNumberInRange(1, 20, "Choose what do you want to do? [1 to 20]? ");
+	int WithdrawValue = 100 * ReadNumberInRange(1, 10, "Choose what do you want to do? [1 to 10]? ");
 	QuickWithdrawFun(WithdrawValue);
 }

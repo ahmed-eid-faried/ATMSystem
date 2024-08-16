@@ -21,12 +21,14 @@ sClient ReadDepositClient(sClient vClient, double DepositValue) {
 	client.PinCode = vClient.PinCode;
 	client.Name = vClient.Name;
 	client.Phone = vClient.Phone;
-	bool CheckBalance = ((vClient.AccountBalance + DepositValue) >= 0);
-	if (!CheckBalance) {
+	if ((vClient.AccountBalance + DepositValue) < 0) {
+		client.AccountBalance = vClient.AccountBalance;
 		cout << "The value you entered is incorrect." << endl;
 		BackToMainMenue();
 	}
-	client.AccountBalance = CheckBalance ? vClient.AccountBalance + DepositValue : vClient.AccountBalance;
+	else {
+		client.AccountBalance = vClient.AccountBalance + DepositValue;
+	}
 	return client;
 };
 
@@ -47,8 +49,10 @@ vector <sClient> SaveDepositCleintsDataToFile(string FileName, vector<sClient> v
 				DataLine = ConvertRecordToLine(ReadDepositClient(C, DepositValue), Seperator);
 				MyFile << DataLine << endl;
 			}
-		}         MyFile.close();
-	} return vClients;
+		}
+		MyFile.close();
+	}
+	return vClients;
 }
 bool IsFindClientByAccountNumber(string AccountNumber, vector<sClient> vClients, sClient& Client) {
 	for (sClient C : vClients) {
