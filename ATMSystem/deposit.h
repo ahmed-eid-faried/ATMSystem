@@ -28,6 +28,7 @@ sClient ReadDepositClient(sClient vClient, double DepositValue) {
 	}
 	else {
 		client.AccountBalance = vClient.AccountBalance + DepositValue;
+		CurrentClient.AccountBalance += DepositValue;
 	}
 	return client;
 };

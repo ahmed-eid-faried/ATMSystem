@@ -36,6 +36,14 @@ void PrintClientCard(sClient Client);
 //vector<sClient> SaveCleintsDataToFile(string FileName, vector<sClient> vClients);
 ///////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////
+int ReadWithdrawValue(string Message = "Enter an amount of multiple of ", int multiply = 10) {
+	int Num;
+	do {
+		cout << Message << multiply << " ?" << endl;
+		cin >> Num;
+	} while (Num % multiply != 0);
+	return Num;
+}
 double ReadDoubleNumber(string Message) {
 	double Num;
 	cout << Message;
@@ -95,7 +103,7 @@ sClient ConvertLineToRecord(string strClientRecord, string Seperator) {
 	Client.AccountBalance = stod(sListOfRecord[4]);
 	return Client;
 }
- 
+
 
 
 void DataFromFileToVector(string path, vector<string>& vFile) {
@@ -266,4 +274,3 @@ void PrintClient(sClient Client) {
 	cout << "| " << setw(12) << left << Client.Phone;
 	cout << "| " << setw(12) << left << Client.AccountBalance;
 };
- 
